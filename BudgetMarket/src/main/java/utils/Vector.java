@@ -74,7 +74,7 @@ public class Vector<E> {
             for (int i = 0; i < size; i++) {
                 newElementData[i] = elementData[i];
             }
-            elementData = newElementData
+            elementData = newElementData;
         }
     }
 
