@@ -1,3 +1,5 @@
+package service;
+
 import model.Client;
 import model.Product;
 import model.Store;
