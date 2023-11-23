@@ -6,6 +6,11 @@ import model.Store;
 import service.iBudgetMarket;
 import utils.Vector;
 
+/**
+ * implementation of iBudgetMarket interface
+ * Created by Jian Yi on 2023-11-23.
+ * @author zhoujianyi
+ */
 public class BudgetMarketImpl implements iBudgetMarket {
 
     private Vector<Store> stores;

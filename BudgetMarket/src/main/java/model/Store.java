@@ -2,6 +2,8 @@ package model;
 import utils.Vector;
 /*
  * a new store with given parameters: store's name and name of the street.
+ *
+ * @author zhoujianyi
  */
 public class Store {
 

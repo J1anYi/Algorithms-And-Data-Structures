@@ -6,6 +6,8 @@ package utils;
  * java.util.ArrayList implementation of add, delete and check,
  * and has a simple expansion mechanism
  * @param <E>
+ *
+ * @author zhoujianyi
  */
 public class Vector<E> {
     private Object[] elementData;

@@ -3,6 +3,10 @@ import model.Product;
 import model.Store;
 import service.impl.BudgetMarketImpl;
 
+/**
+ * Created by Jian Yi on 2023-11-23.
+ * @author zhoujianyi
+ */
 public class Main {
 
     public static void main(String[] args) {

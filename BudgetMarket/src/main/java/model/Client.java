@@ -4,6 +4,8 @@ package model;
 /*
  * Add a new client with given parameters: name, email address, and street
  * address.
+ *
+ * @author zhoujianyi
  */
 public class Client {
     public static int autoincrement = 0;

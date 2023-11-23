@@ -3,6 +3,8 @@ package model;
 /*
  * a product with given parameters: category, price, and store in which this
  * product is available.
+ *
+ * @author zhoujianyi
  */
 public class Product {
     public static int autoincrement = 0;
