@@ -53,10 +53,11 @@ public class Vector<E> {
         if (index >= size || index < 0) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
-        int numMoved = size - index - 1;
-        if (numMoved > 0) {
-            System.arraycopy(elementData, index + 1, elementData, index, numMoved);
+
+        for (int i = index; i < size - 1; i++) {
+            elementData[i] = elementData[i + 1];
         }
+
         elementData[--size] = null; // clear to let GC do its work
     }
 
@@ -69,7 +70,11 @@ public class Vector<E> {
     private void ensureCapacity() {
         if (size == elementData.length) {
             int newIncreasedCapacity = elementData.length * 2;
-            elementData = java.util.Arrays.copyOf(elementData, newIncreasedCapacity);
+            Object[] newElementData = new Object[newIncreasedCapacity];
+            for (int i = 0; i < size; i++) {
+                newElementData[i] = elementData[i];
+            }
+            elementData = newElementData
         }
     }
 
