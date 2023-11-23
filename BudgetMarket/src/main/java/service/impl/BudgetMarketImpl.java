@@ -269,4 +269,28 @@ public class BudgetMarketImpl implements iBudgetMarket {
     }
 
     /************************** end of PART 3 ***************************/
+
+    public Vector<Store> getStores() {
+        return stores;
+    }
+
+    public void setStores(Vector<Store> stores) {
+        this.stores = stores;
+    }
+
+    public Vector<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Vector<Product> products) {
+        this.products = products;
+    }
+
+    public Vector<Client> getClients() {
+        return clients;
+    }
+
+    public void setClients(Vector<Client> clients) {
+        this.clients = clients;
+    }
 }
