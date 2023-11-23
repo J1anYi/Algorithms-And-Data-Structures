@@ -17,7 +17,11 @@ public class Main {
         System.out.println("------------------Test Store------------------");
         int storeID = budgetMarket.addStore("Store 1", "Street 1");
         budgetMarket.addStore("Store 2", "Street 2");
+        for (int i = 3; i < 15; i++) {
+            budgetMarket.addStore("Store " + i, "Street " + i);
+        }
         Store store = budgetMarket.findStore(storeID);
+        budgetMarket.getStores().remove(7);
         System.out.println(store);
         budgetMarket.printAllStores();
 
