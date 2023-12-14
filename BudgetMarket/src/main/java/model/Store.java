@@ -8,7 +8,6 @@ import utils.Vector;
  */
 public class Store {
 
-    public static int autoincrement = 0;
     private int id;
     private String name;
 

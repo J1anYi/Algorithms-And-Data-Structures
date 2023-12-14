@@ -2,6 +2,7 @@ package model;
 
 
 import utils.IDGenerator;
+import utils.Vector;
 
 /*
  * Add a new client with given parameters: name, email address, and street
@@ -10,11 +11,12 @@ import utils.IDGenerator;
  * @author zhoujianyi
  */
 public class Client {
-    public static int autoincrement = 0;
     private int id;
     private String name;
     private String email;
     private String address;
+
+    private Vector<Product> shoppingList;
 
 
     public Client(String name, String email, String address) {
@@ -22,7 +24,7 @@ public class Client {
         this.name = name;
         this.email = email;
         this.address = address;
-
+        this.shoppingList = new Vector<>();
     }
 
     public int getId() {
@@ -55,6 +57,14 @@ public class Client {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Vector<Product> getShoppingList() {
+        return shoppingList;
+    }
+
+    public void setShoppingList(Vector<Product> shoppingList) {
+        this.shoppingList = shoppingList;
     }
 
     @Override

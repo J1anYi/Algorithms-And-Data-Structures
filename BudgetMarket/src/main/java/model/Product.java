@@ -9,7 +9,6 @@ import utils.IDGenerator;
  * @author zhoujianyi
  */
 public class Product {
-    public static int autoincrement = 0;
     private int id;
     private String category;
     private float price;

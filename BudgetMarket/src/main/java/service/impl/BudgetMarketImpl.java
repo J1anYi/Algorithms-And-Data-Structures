@@ -194,7 +194,33 @@ public class BudgetMarketImpl implements iBudgetMarket {
      */
     @Override
     public boolean addProductToShoppingList(int clientID, String productCategory) {
-        return false;
+        // find client
+        Client client = findClient(clientID);
+        if (client == null) {
+            System.out.println("Client with id " + clientID + " does not exist");
+            return false;
+        }
+
+        // find product
+        Vector<Product> addProduct = new Vector<>();
+        for (int i = 0; i < products.size(); i++) {
+            Product p = products.get(i);
+            if (p.getCategory().equals(productCategory)) {
+                addProduct.add(p);
+            }
+        }
+        if (addProduct.size() == 0) {
+            System.out.println("Product with category " + productCategory + " does not exist");
+            return false;
+        }
+
+        // add product to client's shopping list
+        for (int i = 0; i < addProduct.size(); i++) {
+            Product p = addProduct.get(i);
+            client.getShoppingList().add(p);
+        }
+
+        return true;
     }
 
     /*
@@ -207,7 +233,33 @@ public class BudgetMarketImpl implements iBudgetMarket {
      */
     @Override
     public Vector buyProducts(int clientID) {
-        return null;
+        // find client
+        Client client = findClient(clientID);
+        if (client == null) {
+            System.out.println("Client with id " + clientID + " does not exist");
+            return null;
+        }
+
+        // find all products in client's shopping list
+        Vector<Product> shoppingList = client.getShoppingList();
+        if (shoppingList.size() == 0) {
+            System.out.println("Client with id " + clientID + " does not have any product in shopping list");
+            return null;
+        }
+
+        // clone shopping list, prevent changing the original shopping list
+        Vector<Product> cloneShoppingList = new Vector<>();
+        for (int i = 0; i < shoppingList.size(); i++) {
+            Product p = shoppingList.get(i);
+            Product cloneProduct = new Product(p.getCategory(), p.getPrice());
+            cloneProduct.setId(p.getId());
+            cloneShoppingList.add(cloneProduct);
+        }
+
+        // remove products in shopping list of client
+        shoppingList.clear();
+
+        return cloneShoppingList;
     }
 
     /*
@@ -221,7 +273,42 @@ public class BudgetMarketImpl implements iBudgetMarket {
      */
     @Override
     public boolean removeProductFromStore(String category, int storeID) {
-        return false;
+        // find store
+        Store store = findStore(storeID);
+        if (store == null) {
+            System.out.println("Store with id " + storeID + " does not exist");
+            return false;
+        }
+
+        // find product
+        Vector<Product> removeProduct = new Vector<>();
+        for (int i = 0; i < store.getProducts().size(); i++) {
+            Product p = store.getProducts().get(i);
+            if (p.getCategory().equals(category)) {
+                removeProduct.add(p);
+            }
+        }
+        if (removeProduct.size() == 0) {
+            System.out.println("Product with category " + category + " does not exist");
+            return false;
+        }
+
+        // remove product from store
+        for (int i = 0; i < removeProduct.size(); i++) {
+            Product p = removeProduct.get(i);
+
+            // remove product from store
+            store.getProducts();
+            for (int j = 0; j < store.getProducts().size(); j++) {
+                Product product = store.getProducts().get(j);
+                if (product.getId() == p.getId()) {
+                    store.getProducts().remove(j);
+                    break;
+                }
+            }
+        }
+
+        return true;
     }
 
     /************************** end of PART 2 ***************************/

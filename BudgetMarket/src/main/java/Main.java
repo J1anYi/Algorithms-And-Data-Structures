@@ -2,6 +2,7 @@ import model.Client;
 import model.Product;
 import model.Store;
 import service.impl.BudgetMarketImpl;
+import utils.Vector;
 
 /**
  * Created by Jian Yi on 2023-11-23.
@@ -42,5 +43,42 @@ public class Main {
         Client client = budgetMarket.findClient(1);
         System.out.println(client);
         budgetMarket.printAllClients();
+
+        // Part 2 Test
+        System.out.println("------------------Test Part 2------------------");
+        // test add product to shopping list
+        System.out.println("------------------Test add product to shopping list------------------");
+        budgetMarket.addProductToShoppingList(1, "Product 1");
+        budgetMarket.addProduct("Product 2", 3.0f, storeID);
+        // print shopping list
+        Vector<Product> shoppingList = budgetMarket.findClient(1).getShoppingList();
+        System.out.println("Shopping list of client 1:");
+        for (int i = 0; i < shoppingList.size(); i++) {
+            System.out.println(shoppingList.get(i));
+        }
+
+        // test buy product
+        System.out.println("------------------Test buy product------------------");
+        Vector buyProducts = budgetMarket.buyProducts(1);
+        // print stores to buy products
+        System.out.println("Stores to buy products:");
+        for (int i = 0; i < buyProducts.size(); i++) {
+            System.out.println(buyProducts.get(i));
+        }
+
+        // test remove product
+        System.out.println("------------------Test remove product------------------");
+        Vector<Product> products = budgetMarket.findStore(storeID).getProducts();
+        System.out.println("Original products in store " + storeID + ":");
+        for (int i = 0; i < products.size(); i++) {
+            System.out.println(products.get(i));
+        }
+        System.out.println("------------------After remove product------------------");
+        budgetMarket.removeProductFromStore("Product 1", storeID);
+        System.out.println("Products in store " + storeID + ":");
+        for (int i = 0; i < products.size(); i++) {
+            System.out.println(products.get(i));
+        }
+
     }
 }
