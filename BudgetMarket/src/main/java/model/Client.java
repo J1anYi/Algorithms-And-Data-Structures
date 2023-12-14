@@ -1,6 +1,8 @@
 package model;
 
 
+import utils.IDGenerator;
+
 /*
  * Add a new client with given parameters: name, email address, and street
  * address.
@@ -14,11 +16,9 @@ public class Client {
     private String email;
     private String address;
 
-    public Client() {
-    }
 
     public Client(String name, String email, String address) {
-        this.id = autoincrement++;
+        this.id = IDGenerator.getInstance().generateClientId();
         this.name = name;
         this.email = email;
         this.address = address;

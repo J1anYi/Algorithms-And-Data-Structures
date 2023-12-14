@@ -1,5 +1,7 @@
 package model;
 
+import utils.IDGenerator;
+
 /*
  * a product with given parameters: category, price, and store in which this
  * product is available.
@@ -12,10 +14,8 @@ public class Product {
     private String category;
     private float price;
 
-    public Product(){}
-
     public Product(String category, float price) {
-        this.id = autoincrement++;
+        this.id = IDGenerator.getInstance().generateProductId();
         this.category = category;
         this.price = price;
     }

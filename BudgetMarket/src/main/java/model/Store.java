@@ -1,4 +1,5 @@
 package model;
+import utils.IDGenerator;
 import utils.Vector;
 /*
  * a new store with given parameters: store's name and name of the street.
@@ -15,10 +16,8 @@ public class Store {
 
     private Vector<Product> products;
 
-    public Store() {
-    }
     public Store(String name, String address) {
-        this.id = autoincrement++;
+        this.id = IDGenerator.getInstance().generateStoreId();
         this.name = name;
         this.address = address;
         products = new Vector<>();

@@ -20,7 +20,7 @@ public class Vector<E> {
 
     public Vector(int initialCapacity) {
         if (initialCapacity < 0) {
-            throw new IllegalArgumentException("Illegal Capacity: " + initialCapacity);
+            System.out.println("Illegal Capacity: " + initialCapacity);
         }
         elementData = new Object[initialCapacity];
     }
@@ -37,7 +37,7 @@ public class Vector<E> {
 
     public E get(int index) {
         if (index >= size || index < 0) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+            System.out.println("Index: " + index + ", Size: " + size);
         }
         return (E) elementData[index];
     }
@@ -51,7 +51,7 @@ public class Vector<E> {
      */
     public void remove(int index) {
         if (index >= size || index < 0) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+            System.out.println("Index: " + index + ", Size: " + size);
         }
 
         for (int i = index; i < size - 1; i++) {
