@@ -49,7 +49,8 @@ public class Main {
         // test add product to shopping list
         System.out.println("------------------Test add product to shopping list------------------");
         budgetMarket.addProductToShoppingList(1, "Product 1");
-        budgetMarket.addProduct("Product 2", 3.0f, storeID);
+        budgetMarket.addProduct("Product 2", 3.0f, 13);
+        budgetMarket.addProductToShoppingList(1, "Product 2");
         // print shopping list
         Vector<Product> shoppingList = budgetMarket.findClient(1).getShoppingList();
         System.out.println("Shopping list of client 1:");
@@ -59,11 +60,11 @@ public class Main {
 
         // test buy product
         System.out.println("------------------Test buy product------------------");
-        Vector buyProducts = budgetMarket.buyProducts(1);
+        Vector stores = budgetMarket.buyProducts(1);
         // print stores to buy products
         System.out.println("Stores to buy products:");
-        for (int i = 0; i < buyProducts.size(); i++) {
-            System.out.println(buyProducts.get(i));
+        for (int i = 0; i < stores.size(); i++) {
+            System.out.println(stores.get(i));
         }
 
         // test remove product

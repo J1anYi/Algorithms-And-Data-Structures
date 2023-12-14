@@ -247,19 +247,23 @@ public class BudgetMarketImpl implements iBudgetMarket {
             return null;
         }
 
-        // clone shopping list, prevent changing the original shopping list
-        Vector<Product> cloneShoppingList = new Vector<>();
+        // find all stores that have products in client's shopping list
+        Vector<Store> stores = new Vector<>();
         for (int i = 0; i < shoppingList.size(); i++) {
             Product p = shoppingList.get(i);
-            Product cloneProduct = new Product(p.getCategory(), p.getPrice());
-            cloneProduct.setId(p.getId());
-            cloneShoppingList.add(cloneProduct);
+            for (int j = 0; j < this.stores.size(); j++) {
+                Store store = this.stores.get(j);
+                for (int k = 0; k < store.getProducts().size(); k++) {
+                    Product product = store.getProducts().get(k);
+                    if (product.getId() == p.getId()) {
+                        stores.add(store);
+                        break;
+                    }
+                }
+            }
         }
 
-        // remove products in shopping list of client
-        shoppingList.clear();
-
-        return cloneShoppingList;
+        return stores;
     }
 
     /*
