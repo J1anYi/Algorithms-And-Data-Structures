@@ -35,6 +35,10 @@ public class Vector<E> {
         elementData[size++] = e;
     }
 
+    public void addLast(E e) {
+        add(e);
+    }
+
     public E get(int index) {
         if (index >= size || index < 0) {
             System.out.println("Index: " + index + ", Size: " + size);
