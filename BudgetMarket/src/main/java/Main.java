@@ -39,7 +39,7 @@ public class Main {
         System.out.println("------------------Test Client------------------");
         int productId = budgetMarket.addProduct("Product 1", 1.0f, storeID);
         budgetMarket.addClient("jianyi", "jianyizhou@vub.be", "Street 1");
-        budgetMarket.addClient("John", "123@gmail.com", "Street 2");
+        budgetMarket.addClient("John", "123@gmail.com", "Street 1");
         Client client = budgetMarket.findClient(1);
         System.out.println(client);
         budgetMarket.printAllClients();
@@ -49,7 +49,10 @@ public class Main {
         // test add product to shopping list
         System.out.println("------------------Test add product to shopping list------------------");
         budgetMarket.addProductToShoppingList(1, "Product 1");
-        budgetMarket.addProduct("Product 2", 3.0f, 13);
+        budgetMarket.addProduct("Product 2", 3.0f, 1);
+        budgetMarket.addProduct("Product 2", 3.0f, 2);
+        budgetMarket.addProduct("Product 2", 3.0f, 3);
+        budgetMarket.addProduct("Product 2", 3.0f, 4);
         budgetMarket.addProductToShoppingList(1, "Product 2");
         // print shopping list
         Vector<Product> shoppingList = budgetMarket.findClient(1).getShoppingList();
@@ -81,5 +84,29 @@ public class Main {
             System.out.println(products.get(i));
         }
 
+
+        // Part 3 Test
+        System.out.println("------------------Test Part 3------------------");
+        // test add street
+        System.out.println("------------------Test add street------------------");
+        budgetMarket.addStreet("Street 1");
+        budgetMarket.addStreet("Street 2");
+        budgetMarket.addStreet("Street 3");
+        budgetMarket.addStreet("Street 4");
+        budgetMarket.addStreet("Street 5");
+        // test connectStreets
+        System.out.println("------------------Test connect streets------------------");
+        budgetMarket.connectStreets("Street 1", "Street 2", 1);
+        budgetMarket.connectStreets("Street 2", "Street 3", 1);
+        budgetMarket.connectStreets("Street 2", "Street 4", 3);
+        budgetMarket.connectStreets("Street 4", "Street 5", 4);
+        budgetMarket.connectStreets("Street 5", "Street 1", 2);
+        // test getShoppingDirections
+        System.out.println("------------------Test get shopping directions------------------");
+        Vector<String> directions = budgetMarket.getShoppingDirections(1, 3);
+        // print directions
+        for (int i = 0; i < directions.size(); i++) {
+            System.out.println(directions.get(i));
+        }
     }
 }

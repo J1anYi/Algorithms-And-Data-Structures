@@ -53,16 +53,18 @@ public class Vector<E> {
      * Using System.arraycopy() method to move the elements behind it
      * @param index
      */
-    public void remove(int index) {
+    public E remove(int index) {
         if (index >= size || index < 0) {
             System.out.println("Index: " + index + ", Size: " + size);
         }
 
+        E oldValue = (E) elementData[index];
         for (int i = index; i < size - 1; i++) {
             elementData[i] = elementData[i + 1];
         }
 
         elementData[--size] = null; // clear to let GC do its work
+        return oldValue;
     }
 
     /**
@@ -90,6 +92,15 @@ public class Vector<E> {
         for (int i = 0; i < size; i++)
             elementData[i] = null;
         size = 0;
+    }
+
+    public boolean contains(E e) {
+        for (int i = 0; i < size; i++) {
+            if (elementData[i].equals(e)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

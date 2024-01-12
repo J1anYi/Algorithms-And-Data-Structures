@@ -4,6 +4,7 @@ import model.Client;
 import model.Product;
 import model.Store;
 import service.iBudgetMarket;
+import utils.Graph;
 import utils.Vector;
 
 /**
@@ -16,11 +17,13 @@ public class BudgetMarketImpl implements iBudgetMarket {
     private Vector<Store> stores;
     private Vector<Product> products;
     private Vector<Client> clients;
+    private Graph graph;
 
     public BudgetMarketImpl() {
         stores = new Vector<>();
         products = new Vector<>();
         clients = new Vector<>();
+        graph = new Graph();
     }
 
     /************************** PART 1 ***************************/
@@ -36,6 +39,7 @@ public class BudgetMarketImpl implements iBudgetMarket {
     @Override
     public int addStore(String name, String street) {
         Store store = new Store(name, street);
+        graph.addNode(street);
         stores.add(store);
         return store.getId();
     }
@@ -82,6 +86,7 @@ public class BudgetMarketImpl implements iBudgetMarket {
     public int addClient(String name, String email, String street) {
         Client client = new Client(name, email, street);
         clients.add(client);
+        graph.addNode(street);
 
         return client.getId();
     }
@@ -326,7 +331,7 @@ public class BudgetMarketImpl implements iBudgetMarket {
      */
     @Override
     public void addStreet(String street) {
-
+        this.graph.addNode(street);
     }
 
     /*
@@ -340,7 +345,7 @@ public class BudgetMarketImpl implements iBudgetMarket {
      */
     @Override
     public void connectStreets(String street1, String street2, int distance) {
-
+        this.graph.addEdge(street1, street2, distance);
     }
 
     /*
@@ -356,7 +361,39 @@ public class BudgetMarketImpl implements iBudgetMarket {
      */
     @Override
     public Vector getShoppingDirections(int clientID, int distance) {
-        return null;
+        // find client
+        Client client = findClient(clientID);
+        if (client == null) {
+            System.out.println("Client with id " + clientID + " does not exist");
+            return null;
+        }
+
+        // find stores to visit
+        Vector<Store> stores = buyProducts(clientID);
+        if (stores == null) {
+            System.out.println("Client with id " + clientID + " does not have any store to visit");
+            return null;
+        }
+
+        // find streets to clients can visit within given distance
+        Vector<String> streets = new Vector<>();
+        // where client lives
+        Graph.Node live = graph.getNode(client.getAddress());
+        if (live == null) {
+            System.out.println("Client with id " + clientID + " does not live in any street");
+            return null;
+        }
+
+        // find live live and stores live can visit
+        for (int i = 0; i < stores.size(); i++) {
+            Store store = stores.get(i);
+            Graph.Node storeNode = graph.getNode(store.getAddress());
+            if (graph.getDistance(live.getLabel(), storeNode.getLabel()) <= distance) {
+                streets.add(store.getAddress());
+            }
+        }
+
+        return streets;
     }
 
     /************************** end of PART 3 ***************************/
